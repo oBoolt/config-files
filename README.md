@@ -12,6 +12,7 @@ This will clone the repository to `~/.config/yolk` using the `XDG_CONFIG_HOME` a
 as `yolk` needs
 ```
 $ git clone https://github.com/oBoolt/config-files.git "${XDG_CONFIG_HOME:-${HOME}/.config}/yolk-test"
+$ yolk safeguard
 $ yolk sync
 ```
 
