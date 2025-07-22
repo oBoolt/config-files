@@ -1,5 +1,5 @@
 # :gear: oBoolt's dotfiles
-Here I you can see my config files managed by the [yolk](https://github.com/elkowar/yolk) project
+Here you can see my config files managed by the [yolk](https://github.com/elkowar/yolk) project
 
 ## :toolbox: Requirements
 You need the following softwares to setup:
