@@ -2,6 +2,10 @@ import "themes" as themes;
 
 export let data = #{
     colors: themes::gruvbox, 
+    fonts: #{
+        dev: "FiraCodeNerdFont",
+        user: "NotoSansSerif",
+    }
 };
 
 export let eggs = #{
