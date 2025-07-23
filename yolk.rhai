@@ -1,3 +1,9 @@
+import "themes" as themes;
+
+export let data = #{
+    colors: themes::gruvbox, 
+};
+
 export let eggs = #{
     nvim: #{ 
         targets: "~/.config/nvim",
@@ -37,6 +43,8 @@ export let eggs = #{
         main_file: ".tmux.conf",
     },
     wofi: #{
-        targets: "~/.config/wofi"
+        targets: "~/.config/wofi",
+        templates: ["style.css"],
     },
 }
+
