@@ -5,5 +5,42 @@
 }
 
 window {
-    font-family: NotoSansSerif;
+    /* {# replace_quoted(data.fonts.user) #} */
+    font-family: "NotoSansSerif";
+    /* {# replace_color(data.colors.background) #} */
+    background-color: #282828;
+    /* {# replace_color(data.colors.foreground) #} */
+    color: #ebdbb2;
+}
+
+#outer-box {
+    /* {# replace_color(data.colors.aqua) #} */
+    border: 2px solid #689d6a;
+}
+
+#input {
+    border-radius: 0;
+    background: inherit;
+    border: none;
+    /* {# replace_color(data.colors.foreground) #} */
+    color: #ebdbb2;
+    /* {# replace_color(data.colors.aqua) #} */
+    border-bottom: 2px solid #689d6a;
+    outline: none;
+}
+
+#input:focus {
+    outline-color: transparent;
+}
+
+#entry:selected {
+    border: none;
+    background: none;
+    display: none;
+}
+
+#text:selected {
+    background: red;
+    border: none;
+    display: none;
 }
