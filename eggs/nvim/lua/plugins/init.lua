@@ -42,6 +42,9 @@ return {
     },
     {
         'rhaiscript/vim-rhai'
-    }
+    },
+    {
+        'gpanders/nvim-parinfer'
+    },
 }
 
