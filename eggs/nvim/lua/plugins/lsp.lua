@@ -33,6 +33,7 @@ return {
                 ['biome'] = { 'javascript', 'typescript', 'json' },
                 ['java_language_server'] = { 'java' },
                 ['clangd'] = { 'c', 'cpp'}, 
+                ['cssls'] = { 'css', 'scss', 'less' },
             },
         })
 
