@@ -57,3 +57,6 @@ fi
 # SSH
 # set sock for ssh-agent
 [[ $(systemctl --user status ssh-agent.service >/dev/null) -eq 0 ]] && export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
+
+# eww
+[ -x $(which eww) ] && eval "$(eww shell-completions --shell zsh)"
