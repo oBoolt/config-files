@@ -9,7 +9,7 @@
   :initial "1"
   "scripts/execs/hyprland --active")
 (deflisten workspacesData
-  :initial "[]"
+  :initial "[1]"
   "scripts/execs/hyprland --workspaces")
 
 ;; ################################
@@ -32,15 +32,14 @@
   (box
     :class "left area"
     :halign "start"
-    (workspaces)
-    (label
-      :text activeWorkspace)))
+    (workspaces)))
+     
 
 (defwidget center []
   (box
     :class "center area"
     :halign "center"
-    "center"))
+    time))
 
 (defwidget right []
   (box
