@@ -3,12 +3,14 @@
 }
 
 .bar {
-  font-family: NotoSansSerif;
+  /* {# replace_quoted(data.fonts.user) #} */
+  font-family: "NotoSansSerif";
   background: red;
   padding: 0 1.5em 0 1.5em;
 }
 
 .icon {
+  /* {# replace_quoted(data.fonts.dev) #} */
   font-family: "FiraCodeNerdFont";
 }
 

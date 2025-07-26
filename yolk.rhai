@@ -23,6 +23,7 @@ export let eggs = #{
     },
     eww: #{
         targets: "~/.config/eww",
+        templates: ["**/*.scss", "eww.yuck"],
         main_file: "eww.yuck",
     },
     git: #{
