@@ -24,6 +24,11 @@
         :onclick "hyprctl dispatch workspace ${workspace}"
         workspace))))
 
+(defwidget icon [text]
+  (label
+    :class "icon"
+    :text text)) 
+
 (defwidget separator []
   (box 
     :class "separator"))
@@ -45,7 +50,8 @@
   (box
     :class "right area"
     :halign "end"
-    "test"))
+    (icon
+      :text "")))
 
 (defwindow bar
   :monitor 0
