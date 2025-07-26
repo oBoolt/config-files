@@ -1,7 +1,7 @@
 ;; ################################
 ;; #          VARIABLES           #
 ;; ################################
-(defpoll time
+(defpoll dateData
   :interval "30s"
   :initial "..."
   "date +%H:%M")
@@ -24,10 +24,15 @@
         :onclick "hyprctl dispatch workspace ${workspace}"
         workspace))))
 
+(defwidget date []
+  (label
+    :class "date"
+    :text dateData))
+
 (defwidget icon [text]
   (label
-    :class "icon"
-    :text text)) 
+   :class "icon"
+   :text text)) 
 
 (defwidget separator []
   (box 
@@ -44,14 +49,14 @@
   (box
     :class "center area"
     :halign "center"
-    time))
+    (date)))
 
 (defwidget right []
   (box
     :class "right area"
     :halign "end"
-    (icon
-      :text "")))
+    "a"))
+     
 
 (defwindow bar
   :monitor 0
