@@ -4,7 +4,7 @@
 (defvar spacing 10)
 (defpoll dateData
   :interval "10s"
-  :initial "..."
+  :initial "00:00"
   "date +%H:%M")
 (deflisten activeWorkspace
   :initial "1"
