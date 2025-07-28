@@ -96,8 +96,12 @@
 
 (defwidget left []
   (box
-    :class "left area"
     :halign "start"
+    :space-evenly false
+    :spacing 10
+    :class "left area"
+    (date)
+    (separator)
     (workspaces)))
 
 (defwidget center []
