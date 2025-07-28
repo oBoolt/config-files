@@ -2,9 +2,9 @@
 ;; #          VARIABLES           #
 ;; ################################
 (defpoll dateData
-  :interval "30s"
+  :interval "1s"
   :initial "..."
-  "date +%H:%M")
+  "date +%H:%M:%S")
 (deflisten activeWorkspace
   :initial "1"
   "scripts/execs/hyprland --active")
@@ -15,9 +15,15 @@
 ;; ################################
 ;; #            WIDGETS           #
 ;; ################################
+(defwidget separator []
+  (box 
+    :class "separator"))
+
 (defwidget workspaces []
   (box
+    :orientation "h"
     :class "workspaces"
+    :spacing 10
     (for workspace in workspacesData
       (button
         :class {workspace == activeWorkspace ? "active" : ""}
@@ -25,25 +31,24 @@
         workspace))))
 
 (defwidget date []
-  (label
+  (box
     :class "date"
-    :text dateData))
+    (label
+      :text dateData)))
 
-(defwidget icon [text]
-  (label
-   :class "icon"
-   :text text)) 
-
-(defwidget separator []
-  (box 
-    :class "separator"))
+(defwidget powerbutton []
+  (eventbox
+    :class "power-button"
+    :onclick "notify-send 'shutdown'"
+    (label
+      :justify "center"
+      :text "󰐥")))
 
 (defwidget left []
   (box
     :class "left area"
     :halign "start"
     (workspaces)))
-     
 
 (defwidget center []
   (box
@@ -55,8 +60,8 @@
   (box
     :class "right area"
     :halign "end"
-    "a"))
-     
+    :hexpand true
+    (powerbutton)))
 
 (defwindow bar
   :monitor 0
@@ -69,6 +74,8 @@
   :stacking "fg"
   :exclusive true
   (box
+    :orientation "h"
+    :space-evenly true
     (left)
     (center)
     (right)))

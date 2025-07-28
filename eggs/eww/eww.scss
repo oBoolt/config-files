@@ -5,15 +5,17 @@
 .bar {
   /* {# replace_quoted(data.fonts.user) #} */
   font-family: "NotoSansSerif";
+  font-size: 16px;
+  font-weight: bold;
   background: red;
   padding: 0 1.5em 0 1.5em;
 }
 
-.icon {
-  /* {# replace_quoted(data.fonts.dev) #} */
-  font-family: "FiraCodeNerdFont";
-}
-
 .bar .workspaces button.active {
   background: green;
+}
+
+.bar .power-button {
+  /* {# replace_quoted(data.fonts.fira.propo) #} */
+  font-family: "FiraCodeNerdFontPropo";
 }
