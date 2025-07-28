@@ -43,13 +43,16 @@
 (defwidget workspaces []
   (box
     :orientation "h"
-    :class "workspaces"
+    :hexpand true
     :spacing 10
+    :class "workspaces"
     (for workspace in workspacesData
       (button
         :class {workspace == activeWorkspace ? "active" : ""}
         :onclick "hyprctl dispatch workspace ${workspace}"
-        workspace))))
+        (label
+          :vexpand false
+          :text workspace)))))
 
 (defwidget date []
   (box
