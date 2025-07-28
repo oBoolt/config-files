@@ -63,6 +63,29 @@
       :justify "center"
       :text "󰐥")))
 
+(defwidget battery [capacity status]
+  (box
+    :class "battery"
+    :space-evenly false
+    :spacing 10
+    (label
+      :class "icon"
+      :text {status == "Charging" ? "󰂄" : 
+             capacity < 10 ? "󰂃" :
+             capacity < 20 ? "󰁺" :
+             capacity < 30 ? "󰁻" :
+             capacity < 40 ? "󰁼" :
+             capacity < 50 ? "󰁽" :
+             capacity < 60 ? "󰁾" :
+             capacity < 70 ? "󰁿" :
+             capacity < 80 ? "󰂀" :
+             capacity < 90 ? "󰂁" :
+             capacity < 100 ? "󰂂" : "󰁹"})
+             
+    (label
+      :class "number"
+      :text "${capacity}%")))
+
 (defwidget left []
   (box
     :class "left area"
@@ -77,8 +100,13 @@
 
 (defwidget right []
   (box
-    :class "right area"
     :halign "end"
-    :hexpand true
+    :space-evenly false
+    :spacing 10
+    :class "right area"
+    (battery
+      :capacity {EWW_BATTERY.BAT0.capacity}
+      :status {EWW_BATTERY.BAT0.status})
+    (separator)
     (powerbutton)))
 
