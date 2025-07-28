@@ -36,7 +36,9 @@
 ;; ################################
 (defwidget separator []
   (box 
-    :class "separator"))
+    :class "separator"
+    (label
+      :text "|")))
 
 (defwidget workspaces []
   (box
