@@ -2,9 +2,9 @@
 ;; #          VARIABLES           #
 ;; ################################
 (defpoll dateData
-  :interval "1s"
+  :interval "10s"
   :initial "..."
-  "date +%H:%M:%S")
+  "date +%H:%M")
 (deflisten activeWorkspace
   :initial "1"
   "scripts/execs/hyprland --active")
@@ -57,6 +57,11 @@
 (defwidget date []
   (box
     :class "date"
+    :space-evenly false
+    :spacing 10
+    (label
+      :class "icon"
+      :text "󰥔")
     (label
       :text dateData)))
 
