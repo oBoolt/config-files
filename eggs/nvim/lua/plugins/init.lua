@@ -46,5 +46,8 @@ return {
     {
         'gpanders/nvim-parinfer'
     },
+    {
+        'tpope/vim-fugitive'
+    },
 }
 
