@@ -11,11 +11,17 @@
   padding: 0 1.5em 0 1.5em;
 }
 
+.icon {
+  /* {# replace_quoted(data.fonts.fira.propo) #}*/
+  font-family: "FiraCodeNerdFontPropo";
+}
+
 .bar .workspaces button.active {
   background: green;
 }
 
 .bar .power-button {
-  /* {# replace_quoted(data.fonts.fira.propo) #} */
-  font-family: "FiraCodeNerdFontPropo";
+  &:hover {
+    background: green;
+  }
 }

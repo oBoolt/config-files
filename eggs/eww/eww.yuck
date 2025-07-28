@@ -71,6 +71,7 @@
     :class "power-button"
     :onclick "notify-send 'shutdown'"
     (label
+      :class "icon"
       :justify "center"
       :text "󰐥")))
 
