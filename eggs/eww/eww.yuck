@@ -57,6 +57,12 @@
     (label
       :text dateData)))
 
+(defwidget title []
+  (box
+    :class "title"
+    (label
+      :text titleData)))
+
 (defwidget powerbutton []
   (eventbox
     :class "power-button"
@@ -96,9 +102,9 @@
 
 (defwidget center []
   (box
-    :class "center area"
     :halign "center"
-    (date)))
+    :class "center area"
+    (title)))
 
 (defwidget right []
   (box
