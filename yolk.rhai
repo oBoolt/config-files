@@ -5,6 +5,16 @@ export let data = #{
     fonts: #{
         dev: "FiraCodeNerdFont",
         user: "NotoSansSerif",
+        fira: #{
+            normal: "FiraCodeNerdFont",
+            propo: "FiraCodeNerdFontPropo",
+            mono: "FiraCodeNerdFontMono",
+        },
+        noto: #{
+            sans: "NotoSansSerif",
+            serif: "NotoSerif",
+            emoji: "NotoColorEmoji"
+        }
     }
 };
 
