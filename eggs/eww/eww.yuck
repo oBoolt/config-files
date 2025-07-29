@@ -51,7 +51,9 @@
               :anchor "top right")
   :stacking "overlay"
   :exclusive false
-  (systray))
+  (eventbox
+    :onhoverlost "scripts/toggle_tray.sh"
+    (systray)))
    
    
 ;; ################################
