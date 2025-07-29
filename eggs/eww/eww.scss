@@ -1,14 +1,23 @@
-* {
-  all: unset;
-}
+/* * { */
+/*   all: unset; */
+/* } */
 
 .bar {
+  all: unset;
   /* {# replace_quoted(data.fonts.user) #} */
   font-family: "NotoSansSerif";
   font-size: 16px;
   font-weight: bold;
   background: red;
   padding: 0 1.5em 0 1.5em;
+}
+
+button {
+  all: unset;
+}
+
+.tray {
+  background: yellow;
 }
 
 .icon {
@@ -26,4 +35,9 @@
   &:hover {
     background: green;
   }
+}
+
+.bar .tray-widget button.active {
+  background: yellow;
+  color: black;
 }

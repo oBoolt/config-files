@@ -3,6 +3,7 @@
 ;; ################################
 (defvar spacing 10)
 (defvar debug `{"enable": false, "title": ""}`)
+(defvar tray false)
 (defpoll date
   :interval "10s"
   :initial "00:00"
@@ -39,6 +40,20 @@
     (left)
     (center)
     (right)))
+
+(defwindow tray
+  :monitor 0
+  :geometry (geometry
+              :width "200px"
+              :height "50px"
+              :x "2.5%"
+              :y "10px"
+              :anchor "top right")
+  :stacking "overlay"
+  :exclusive false
+  (systray))
+   
+   
 ;; ################################
 ;; #            WIDGETS           #
 ;; ################################
@@ -129,6 +144,17 @@
          :class "number"
          :text "${floor(volume * 100)}%"))))
 
+(defwidget tray []
+  (box :class "tray-widget"
+    :space-evenly false
+    :spacing {spacing}
+    (button
+      :class {tray ? "active" : ""}
+      :onclick "scripts/toggle_tray.sh"
+      (label
+        :class "icon"
+        :text "󰅀"))))
+
 (defwidget left []
   (box
     :halign "start"
@@ -158,6 +184,8 @@
     (battery
       :capacity {EWW_BATTERY.BAT0.capacity}
       :status {EWW_BATTERY.BAT0.status})
+    (separator)
+    (tray)
     (separator)
     (powerbutton)))
 
