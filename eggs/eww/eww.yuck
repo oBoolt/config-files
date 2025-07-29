@@ -15,9 +15,12 @@
 (deflisten title
   :initial "..."
   "scripts/execs/hyprland --active-window")
-(deflisten volumeData
+(deflisten volume
   :initial "0.5"
   "scripts/audio.sh --volume")
+(deflisten muted
+  :initial false
+  "scripts/audio.sh --muted")
 ;; ################################
 ;; #            WINDOWS           #
 ;; ################################
@@ -107,6 +110,23 @@
       :class "number"
       :text "${capacity}%")))
 
+(defwidget audio [volume muted]
+  (eventbox
+    :onclick "wpctl set-mute @DEFAULT_SINK@ toggle"
+    (box
+      :class "audio"
+      :space-evenly false
+      :spacing {spacing}
+       (label
+         :class "icon"
+         :text {muted ? "󰖁" : 
+                volume == 0 ? "󰝟" : 
+                volume <= 0.35 ? "󰕿" : 
+                volume <= 0.65 ? "󰖀" : "󰕾"})
+       (label
+         :class "number"
+         :text "${floor(volume * 100)}%"))))
+
 (defwidget left []
   (box
     :halign "start"
@@ -129,6 +149,10 @@
     :space-evenly false
     :spacing {spacing}
     :class "right area"
+    (audio
+      :volume volume
+      :muted muted)
+    (separator)
     (battery
       :capacity {EWW_BATTERY.BAT0.capacity}
       :status {EWW_BATTERY.BAT0.status})
