@@ -74,8 +74,7 @@
         :class {workspace == activeWorkspace ? "active" : ""}
         :onclick "hyprctl dispatch workspace ${workspace}"
         (label
-          :vexpand false
-          :text workspace)))))
+          :text {workspace == activeWorkspace ? "" : ""})))))
 
 (defwidget date []
   (box

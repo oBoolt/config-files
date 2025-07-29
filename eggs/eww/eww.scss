@@ -27,11 +27,17 @@ button {
   font-weight: bold;
 }
 
+.bar .workspaces {
+  padding: 0.5rem;
+}
+
 .bar .workspaces button.active {
-  background: green;
+  color: green;
 }
 
 .bar .power-button {
+  padding: 0.5rem;
+
   &:hover {
     background: green;
   }
