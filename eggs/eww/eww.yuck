@@ -182,7 +182,9 @@
     :space-evenly false
     :spacing {spacing}
     :class "left area"
-    (date)
+    (battery
+      :capacity {EWW_BATTERY.BAT0.capacity}
+      :status {EWW_BATTERY.BAT0.status})
     (separator)
     (workspaces)))
 
@@ -202,9 +204,7 @@
       :volume volume
       :muted muted)
     (separator)
-    (battery
-      :capacity {EWW_BATTERY.BAT0.capacity}
-      :status {EWW_BATTERY.BAT0.status})
+    (date)
     (separator)
     (tray)
     (separator)
