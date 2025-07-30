@@ -2,7 +2,6 @@
 ;; #          VARIABLES           #
 ;; ################################
 (defvar spacing 10)
-(defvar debug `{"enable": false, "title": ""}`)
 (defvar tray false)
 (defpoll date
   :interval "10s"
@@ -94,7 +93,7 @@
     :class "title"
     (label
       :truncate true
-      :text {debug.enable ? debug.title : title})))
+      :text title)))
 
 (defwidget powerbutton []
   (eventbox
