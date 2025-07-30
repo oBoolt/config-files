@@ -16,15 +16,28 @@ button {
   all: unset;
 }
 
-.tray {
-  background: yellow;
-}
-
 .icon {
   /* {# replace_quoted(data.fonts.fira.propo) #}*/
   font-family: "FiraCodeNerdFontPropo";
   font-size: 1.2em;
   font-weight: bold;
+}
+
+.tray {
+  background: yellow;
+}
+
+.fullscreen {
+  all: unset;
+  font-size: 16px;
+}
+
+.fullscreen label {
+  color: green;
+  padding-left: 0.5em;
+  padding-right: 0.5em;
+  padding-top: 0.25em;
+  padding-bottom: 0.25em;
 }
 
 .bar .workspaces {

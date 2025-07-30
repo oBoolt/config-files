@@ -26,7 +26,9 @@
 (deflisten music
   :initial "..."
   "playerctl --follow metadata --format '{{ artist }} - {{ title }}'")
- 
+(deflisten fullscreen
+  :initial false
+  "scripts/execs/hyprland --fullscreen") 
 ;; ################################
 ;; #            WINDOWS           #
 ;; ################################
@@ -58,8 +60,20 @@
   (eventbox
     :onhoverlost "scripts/toggle_tray.sh"
     (systray)))
-   
-   
+(defwindow fullscreen
+  :monitor 0
+  :geometry (geometry
+              :width "16px"
+              :height "16px"
+              :x "15px"
+              :y "15px"
+              :anchor "bottom right")
+  :stacking "overlay"
+  :exclusive false
+  (label
+    :active {fullscreen}
+    :visible {fullscreen}
+    :text ""))
 ;; ################################
 ;; #            WIDGETS           #
 ;; ################################
