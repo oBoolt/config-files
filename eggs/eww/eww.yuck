@@ -3,6 +3,7 @@
 ;; ################################
 (defvar spacing 10)
 (defvar tray false)
+(defvar showMusic false)
 (defpoll date
   :interval "10s"
   :initial "00:00"
@@ -22,6 +23,10 @@
 (deflisten muted
   :initial false
   "scripts/audio.sh --muted")
+(deflisten music
+  :initial "..."
+  "playerctl --follow metadata --format '{{ artist }} - {{ title }}'")
+ 
 ;; ################################
 ;; #            WINDOWS           #
 ;; ################################
@@ -89,11 +94,13 @@
       :text date)))
 
 (defwidget title []
-  (box
-    :class "title"
-    (label
-      :truncate true
-      :text title)))
+  (eventbox
+    :onclick "eww update showMusic=${!showMusic}"
+    (box
+      :class "title"
+      (label
+        :truncate true
+        :text {showMusic ? music : title}))))
 
 (defwidget powerbutton []
   (eventbox
