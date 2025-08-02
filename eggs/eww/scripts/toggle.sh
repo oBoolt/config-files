@@ -2,7 +2,7 @@
 
 CACHE="${XDG_CACHE_HOME:-${HOME}/.cache}"
 EWW="eww --config $(eww get EWW_CONFIG_DIR)"
-WINDOWS=("tray" "fullscreen")
+WINDOWS=("tray")
 
 toggle() {
     local LOCK_FILE="$CACHE/eww-$1.lock"
