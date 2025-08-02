@@ -4,6 +4,7 @@
 (defvar spacing 10)
 (defvar tray false)
 (defvar showMusic false)
+(defvar revealAudio false)
 (defpoll date
   :interval "10s"
   :initial "00:00"
@@ -150,20 +151,30 @@
 
 (defwidget audio [volume muted]
   (eventbox
-    :onclick "wpctl set-mute @DEFAULT_SINK@ toggle"
+    :onhover "${EWW_CMD} update revealAudio=true"
+    :onhoverlost "${EWW_CMD} update revealAudio=false"
     (box
       :class "audio"
       :space-evenly false
-      :spacing {spacing}
+      :tooltip {muted ? "Muted" : "${floor(volume * 100)}%"}
+      (button
+        :onclick "wpctl set-mute @DEFAULT_SINK@ toggle"
        (label
          :class "icon"
          :text {muted ? "󰖁" : 
                 volume == 0 ? "󰝟" : 
                 volume <= 0.35 ? "󰕿" : 
-                volume <= 0.65 ? "󰖀" : "󰕾"})
-       (label
-         :class "number"
-         :text "${floor(volume * 100)}%"))))
+                volume <= 0.65 ? "󰖀" : "󰕾"}))
+      (revealer
+        :reveal revealAudio
+        :transition "slideleft"
+        :duration "350ms"
+        (scale
+          :value {volume * 100}
+          :min 0
+          :max 100
+          :onchange "wpctl set-volume @DEFAULT_SINK@ {}%"))))) 
+         
 
 (defwidget tray []
   (box :class "tray-widget"

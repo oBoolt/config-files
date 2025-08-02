@@ -16,6 +16,22 @@ button {
   all: unset;
 }
 
+scale trough {
+  all: unset;
+  background-color: black;
+  min-height: 10px;
+  min-width: 70px;
+}
+
+scale trough slider {
+  all: unset;
+}
+
+scale highlight {
+  all: unset;
+  background: pink;
+}
+
 .icon {
   /* {# replace_quoted(data.fonts.fira.propo) #}*/
   font-family: "FiraCodeNerdFontPropo";
