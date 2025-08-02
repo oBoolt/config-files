@@ -84,6 +84,17 @@
     (label
       :text "|")))
 
+(defwidget slider [reveal value onchange]
+  (revealer
+    :reveal reveal
+    :transition "slideleft"
+    :duration "350ms"
+    (scale
+      :value value
+      :min 0
+      :max 100
+      :onchange onchange))) 
+
 (defwidget workspaces []
   (box
     :orientation "h"
@@ -163,19 +174,13 @@
          :class "icon"
          :text {muted ? "󰖁" : 
                 volume == 0 ? "󰝟" : 
-                volume <= 0.35 ? "󰕿" : 
+                volume <= 0.30 ? "󰕿" : 
                 volume <= 0.65 ? "󰖀" : "󰕾"}))
-      (revealer
+      (slider
         :reveal revealAudio
-        :transition "slideleft"
-        :duration "350ms"
-        (scale
-          :value {volume * 100}
-          :min 0
-          :max 100
-          :onchange "wpctl set-volume @DEFAULT_SINK@ {}%"))))) 
-         
-
+        :value {volume * 100}
+        :onchange "wpctl set-volume @DEFAULT_SINK@ {}%"))))
+        
 (defwidget tray []
   (box :class "tray-widget"
     :space-evenly false
