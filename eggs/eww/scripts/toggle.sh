@@ -7,14 +7,14 @@ WINDOWS=("tray" "fullscreen")
 toggle() {
     local LOCK_FILE="$CACHE/eww-$1.lock"
     if [ -e $LOCK_FILE ]; then
-        $EWW close tray
-        $EWW update tray=false
+        $EWW close $1
+        $EWW update $1=false
         rm $LOCK_FILE
     else
         touch $LOCK_FILE
         $EWW close ${WINDOWS[*]}
-        $EWW open tray
-        $EWW update tray=true
+        $EWW open $1
+        $EWW update $1=true
     fi
 }
 

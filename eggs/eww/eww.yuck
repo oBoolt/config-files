@@ -59,7 +59,7 @@
   :stacking "overlay"
   :exclusive false
   (eventbox
-    :onhoverlost "scripts/toggle_tray.sh"
+    :onhoverlost "scripts/toggle.sh tray"
     (systray)))
 (defwindow fullscreen
   :monitor 0
