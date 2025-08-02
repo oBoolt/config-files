@@ -2,9 +2,11 @@
 ;; #          VARIABLES           #
 ;; ################################
 (defvar spacing 10)
+(defvar duration "350ms")
 (defvar tray false)
 (defvar showMusic false)
 (defvar revealAudio false)
+(defvar revealBattery false)
 (defpoll date
   :interval "10s"
   :initial "00:00"
@@ -36,9 +38,9 @@
 (defwindow bar
   :monitor 0
   :geometry (geometry
-              :width "100%"
-              :height "30px"
-              :anchor "top center")
+  :width "100%"
+  :height "30px"
+  :anchor "top center")
   :stacking "fg"
   :exclusive true
   (box
@@ -51,11 +53,11 @@
 (defwindow tray
   :monitor 0
   :geometry (geometry
-              :width "200px"
-              :height "50px"
-              :x "2.5%"
-              :y "10px"
-              :anchor "top right")
+  :width "200px"
+  :height "50px"
+  :x "2.5%"
+  :y "10px"
+  :anchor "top right")
   :stacking "overlay"
   :exclusive false
   (eventbox
@@ -64,11 +66,11 @@
 (defwindow fullscreen
   :monitor 0
   :geometry (geometry
-              :width "16px"
-              :height "16px"
-              :x "15px"
-              :y "15px"
-              :anchor "bottom right")
+  :width "16px"
+  :height "16px"
+  :x "15px"
+  :y "15px"
+  :anchor "bottom right")
   :stacking "overlay"
   :exclusive false
   (label
@@ -88,8 +90,9 @@
   (revealer
     :reveal reveal
     :transition "slideleft"
-    :duration "350ms"
+    :duration duration
     (scale
+      :class "slider"
       :value value
       :min 0
       :max 100
@@ -138,27 +141,32 @@
       :text "󰐥")))
 
 (defwidget battery [capacity status]
-  (box
-    :class "battery"
-    :space-evenly false
-    :spacing {spacing}
-    (label
-      :class "icon"
-      :text {status == "Charging" ? "󰂄" : 
-             capacity < 10 ? "󰂃" :
-             capacity < 20 ? "󰁺" :
-             capacity < 30 ? "󰁻" :
-             capacity < 40 ? "󰁼" :
-             capacity < 50 ? "󰁽" :
-             capacity < 60 ? "󰁾" :
-             capacity < 70 ? "󰁿" :
-             capacity < 80 ? "󰂀" :
-             capacity < 90 ? "󰂁" :
-             capacity < 100 ? "󰂂" : "󰁹"})
-             
-    (label
-      :class "number"
-      :text "${capacity}%")))
+  (eventbox
+    :onhover "${EWW_CMD} update revealBattery=true"
+    :onhoverlost "${EWW_CMD} update revealBattery=false"
+    (box
+      :class "battery"
+      :space-evenly false
+      :spacing {revealBattery ? spacing : 0 }
+      (label
+        :class "icon"
+        :text {status == "Charging" ? "󰂄" : 
+        capacity < 10 ? "󰂃" :
+        capacity < 20 ? "󰁺" :
+        capacity < 30 ? "󰁻" :
+        capacity < 40 ? "󰁼" :
+        capacity < 50 ? "󰁽" :
+        capacity < 60 ? "󰁾" :
+        capacity < 70 ? "󰁿" :
+        capacity < 80 ? "󰂀" :
+        capacity < 90 ? "󰂁" :
+        capacity < 100 ? "󰂂" : "󰁹"})
+      (revealer
+        :reveal revealBattery
+        :transition "slideleft"
+        :duration duration
+        (label
+          :text "${capacity}%")))))
 
 (defwidget audio [volume muted]
   (eventbox
@@ -167,24 +175,25 @@
     (box
       :class "audio"
       :space-evenly false
+      :spacing { revealAudio ? spacing : 0 }
       :tooltip {muted ? "Muted" : "${floor(volume * 100)}%"}
       (button
         :onclick "wpctl set-mute @DEFAULT_SINK@ toggle"
-       (label
-         :class "icon"
-         :text {muted ? "󰖁" : 
-                volume == 0 ? "󰝟" : 
-                volume <= 0.30 ? "󰕿" : 
-                volume <= 0.65 ? "󰖀" : "󰕾"}))
+        (label
+          :class "icon"
+          :text {muted ? "󰖁" : 
+          volume == 0 ? "󰝟" : 
+          volume <= 0.30 ? "󰕿" : 
+          volume <= 0.65 ? "󰖀" : "󰕾"}))
       (slider
         :reveal revealAudio
         :value {volume * 100}
         :onchange "wpctl set-volume @DEFAULT_SINK@ {}%"))))
-        
+
 (defwidget tray []
   (box :class "tray-widget"
-    :space-evenly false
-    :spacing {spacing}
+       :space-evenly false
+       :spacing {spacing}
     (button
       :class {tray ? "active" : ""}
       :onclick "scripts/toggle.sh tray"
@@ -198,9 +207,7 @@
     :space-evenly false
     :spacing {spacing}
     :class "left area"
-    (battery
-      :capacity {EWW_BATTERY.BAT0.capacity}
-      :status {EWW_BATTERY.BAT0.status})
+    (date)
     (separator)
     (workspaces)))
 
@@ -219,8 +226,9 @@
     (audio
       :volume volume
       :muted muted)
-    (separator)
-    (date)
+    (battery
+      :capacity {EWW_BATTERY.BAT0.capacity}
+      :status {EWW_BATTERY.BAT0.status})
     (separator)
     (tray)
     (separator)

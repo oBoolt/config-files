@@ -16,18 +16,22 @@ button {
   all: unset;
 }
 
-scale trough {
+.slider {
+  all: unset;
+}
+
+.slider trough {
   all: unset;
   background-color: black;
   min-height: 10px;
   min-width: 70px;
 }
 
-scale trough slider {
+.slider trough slider {
   all: unset;
 }
 
-scale highlight {
+.slider trough highlight {
   all: unset;
   background: pink;
 }
