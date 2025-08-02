@@ -1,6 +1,33 @@
-/* * { */
-/*   all: unset; */
-/* } */
+.icon {
+  /* {# replace_quoted(data.fonts.fira.propo) #}*/
+  font-family: "FiraCodeNerdFontPropo";
+  font-size: 1.2em;
+  font-weight: bold;
+}
+
+button {
+  all: unset;
+}
+
+.slider {
+  all: unset;
+
+  trough {
+    all: unset;
+    background-color: black;
+    min-height: 10px;
+    min-width: 70px;
+
+    slider {
+      all: unset;
+    }
+
+    highlight {
+      all: unset;
+      background: pink;
+    }
+  }
+}
 
 .bar {
   all: unset;
@@ -10,38 +37,29 @@
   font-weight: bold;
   background: red;
   padding: 0 1.5em 0 1.5em;
+
+  .workspaces {
+    padding: 0.5rem;
+
+    button.active {
+      color: green
+    }
+  }
+
+  .power-button {
+    padding: 0.5rem;
+
+    &:hover {
+      background: green;
+    }
+  }
+
+  .tray-widget button.active {
+    background: yellow;
+    color: black;
+  }
 }
 
-button {
-  all: unset;
-}
-
-.slider {
-  all: unset;
-}
-
-.slider trough {
-  all: unset;
-  background-color: black;
-  min-height: 10px;
-  min-width: 70px;
-}
-
-.slider trough slider {
-  all: unset;
-}
-
-.slider trough highlight {
-  all: unset;
-  background: pink;
-}
-
-.icon {
-  /* {# replace_quoted(data.fonts.fira.propo) #}*/
-  font-family: "FiraCodeNerdFontPropo";
-  font-size: 1.2em;
-  font-weight: bold;
-}
 
 .tray {
   background: yellow;
@@ -50,33 +68,12 @@ button {
 .fullscreen {
   all: unset;
   font-size: 16px;
-}
 
-.fullscreen label {
-  color: green;
-  padding-left: 0.5em;
-  padding-right: 0.5em;
-  padding-top: 0.25em;
-  padding-bottom: 0.25em;
-}
-
-.bar .workspaces {
-  padding: 0.5rem;
-}
-
-.bar .workspaces button.active {
-  color: green;
-}
-
-.bar .power-button {
-  padding: 0.5rem;
-
-  &:hover {
-    background: green;
+  label {
+    color: green;
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+    padding-top: 0.25em;
+    padding-bottom: 0.25em;
   }
-}
-
-.bar .tray-widget button.active {
-  background: yellow;
-  color: black;
 }
