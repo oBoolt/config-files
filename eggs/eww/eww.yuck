@@ -71,7 +71,7 @@
   :x "15px"
   :y "15px"
   :anchor "bottom right")
-  :stacking "overlay"
+  :stacking "fg"
   :exclusive false
   (label
     :active {fullscreen}
