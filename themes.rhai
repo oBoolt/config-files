@@ -1,5 +1,6 @@
 export let gruvbox = #{
     background: "#282828",
+    background_h: "#1d2021",
     foreground: "#ebdbb2",
     red: "#cc241d",
     light_red: "#fb4934",
