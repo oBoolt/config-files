@@ -38,9 +38,9 @@
 (defwindow bar
   :monitor 0
   :geometry (geometry
-  :width "100%"
-  :height "30px"
-  :anchor "top center")
+             :width "100%"
+             :height "30px"
+             :anchor "top center")
   :stacking "fg"
   :exclusive true
   (box
@@ -53,11 +53,11 @@
 (defwindow tray
   :monitor 0
   :geometry (geometry
-  :width "200px"
-  :height "50px"
-  :x "2.5%"
-  :y "10px"
-  :anchor "top right")
+             :width "200px"
+             :height "50px"
+             :x "2.5%"
+             :y "10px"
+             :anchor "top right")
   :stacking "overlay"
   :exclusive false
   (eventbox
@@ -66,11 +66,11 @@
 (defwindow fullscreen
   :monitor 0
   :geometry (geometry
-  :width "16px"
-  :height "16px"
-  :x "15px"
-  :y "15px"
-  :anchor "bottom right")
+             :width "16px"
+             :height "16px"
+             :x "15px"
+             :y "15px"
+             :anchor "bottom right")
   :stacking "fg"
   :exclusive false
   (label
@@ -100,22 +100,22 @@
 
 (defwidget workspaces []
   (box
+    :class "workspaces-widget"
     :orientation "h"
     :hexpand true
     :spacing {spacing}
-    :class "workspaces"
     (for workspace in workspaces
       (button
         :class {workspace == activeWorkspace ? "active" : ""}
         :onclick "hyprctl dispatch workspace ${workspace}"
         (label
+          :class "icon"
           :text {workspace == activeWorkspace ? "" : ""})))))
 
 (defwidget date []
   (box
-    :class "date"
+    :class "date-widget"
     :space-evenly false
-    :spacing {spacing}
     (label
       :class "icon"
       :text "󰥔")
@@ -126,41 +126,46 @@
   (eventbox
     :onclick "eww update showMusic=${!showMusic}"
     (box
-      :class "title"
+      :class "title-widget"
       (label
         :truncate true
         :text {showMusic ? music : title}))))
 
-(defwidget powerbutton []
-  (eventbox
-    :class "power-button"
-    :onclick "notify-send 'shutdown'"
-    (label
-      :class "icon"
-      :justify "center"
-      :text "󰐥")))
+(defwidget power []
+  (box
+    :class "power-widget widget-box"
+    :hexpand false
+    (eventbox
+      :onclick "shutdown 0"
+      :cursor "pointer"
+      (label
+        :class "icon"
+        :text "󰐥"))))
 
 (defwidget battery [capacity status]
   (eventbox
     :onhover "${EWW_CMD} update revealBattery=true"
     :onhoverlost "${EWW_CMD} update revealBattery=false"
     (box
-      :class "battery"
+      :class "battery-widget ${capacity <= 10 ? "critical" : 
+                               capacity <= 25 ? "low" : 
+                               capacity <= 50 ? "half" :
+                               capacity <= 75 ? "high" : "full" }"
       :space-evenly false
-      :spacing {revealBattery ? spacing : 0 }
+      :tooltip status
       (label
         :class "icon"
         :text {status == "Charging" ? "󰂄" : 
-        capacity < 10 ? "󰂃" :
-        capacity < 20 ? "󰁺" :
-        capacity < 30 ? "󰁻" :
-        capacity < 40 ? "󰁼" :
-        capacity < 50 ? "󰁽" :
-        capacity < 60 ? "󰁾" :
-        capacity < 70 ? "󰁿" :
-        capacity < 80 ? "󰂀" :
-        capacity < 90 ? "󰂁" :
-        capacity < 100 ? "󰂂" : "󰁹"})
+               capacity < 10 ? "󰂃" :
+               capacity < 20 ? "󰁺" :
+               capacity < 30 ? "󰁻" :
+               capacity < 40 ? "󰁼" :
+               capacity < 50 ? "󰁽" :
+               capacity < 60 ? "󰁾" :
+               capacity < 70 ? "󰁿" :
+               capacity < 80 ? "󰂀" :
+               capacity < 90 ? "󰂁" :
+               capacity < 100 ? "󰂂" : "󰁹"})
       (revealer
         :reveal revealBattery
         :transition "slideleft"
@@ -172,30 +177,31 @@
   (eventbox
     :onhover "${EWW_CMD} update revealAudio=true"
     :onhoverlost "${EWW_CMD} update revealAudio=false"
+    :cursor "pointer"
     (box
-      :class "audio"
+      :class "audio-widget"
       :space-evenly false
-      :spacing { revealAudio ? spacing : 0 }
       :tooltip {muted ? "Muted" : "${floor(volume * 100)}%"}
       (button
         :onclick "wpctl set-mute @DEFAULT_SINK@ toggle"
         (label
           :class "icon"
           :text {muted ? "󰖁" : 
-          volume == 0 ? "󰝟" : 
-          volume <= 0.30 ? "󰕿" : 
-          volume <= 0.65 ? "󰖀" : "󰕾"}))
+                 volume == 0 ? "󰝟" : 
+                 volume <= 0.30 ? "󰕿" : 
+                 volume <= 0.65 ? "󰖀" : "󰕾"}))
       (slider
         :reveal revealAudio
         :value {volume * 100}
         :onchange "wpctl set-volume @DEFAULT_SINK@ {}%"))))
 
 (defwidget tray []
-  (box :class "tray-widget"
-       :space-evenly false
-       :spacing {spacing}
-    (button
+  (box 
+    :class "tray-widget widget-box"
+    :space-evenly false
+    (eventbox
       :class {tray ? "active" : ""}
+      :cursor "pointer"
       :onclick "scripts/toggle.sh tray"
       (label
         :class "icon"
@@ -221,7 +227,6 @@
   (box
     :halign "end"
     :space-evenly false
-    :spacing {spacing}
     :class "right area"
     (audio
       :volume volume
@@ -232,5 +237,5 @@
     (separator)
     (tray)
     (separator)
-    (powerbutton)))
+    (power)))
 

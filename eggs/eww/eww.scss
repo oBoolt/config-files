@@ -1,8 +1,40 @@
+/* VARIABLES */
+$br: 3px;
+/* {# replace_color(data.colors.background) #} */
+$bg: #282828;
+/* {# replace_color(data.colors.background_h) #} */
+$bg_h: #1d2021;
+/* {# replace_color(data.colors.foreground) #} */
+$fg: #ebdbb2;
+/* {# replace_color(data.colors.red) #} */
+$red: #cc241d;
+/* {# replace_color(data.colors.light_red) #} */
+$light_red: #fb4934;
+/* {# replace_color(data.colors.green) #} */
+$green: #98971a;
+/* {# replace_color(data.colors.yellow) #} */
+$yellow: #d79923;
+/* {# replace_color(data.colors.orange) #} */
+$orange: #d65d0e;
+/* {# replace_color(data.colors.aqua) #} */
+$aqua: #689d6a;
+/* {# replace_color(data.colors.grey) #} */
+$grey: #a89984;
+
+/* GLOBALS */
+* {
+  /* {# replace_quoted(data.fonts.user) #}*/
+  font-family: "NotoSansSerif";
+  font-size: 16px;
+}
+
 .icon {
   /* {# replace_quoted(data.fonts.fira.propo) #}*/
   font-family: "FiraCodeNerdFontPropo";
   font-size: 1.2em;
   font-weight: bold;
+  padding: 0.2rem 0.52rem 0.2rem 0.52rem;
+  color: $fg;
 }
 
 button {
@@ -10,13 +42,12 @@ button {
 }
 
 .slider {
-  all: unset;
-
   trough {
     all: unset;
-    background-color: black;
+    background-color: $bg_h;
     min-height: 10px;
     min-width: 70px;
+    border-radius: $br;
 
     slider {
       all: unset;
@@ -24,39 +55,110 @@ button {
 
     highlight {
       all: unset;
-      background: pink;
+      background: $fg;
+      border-radius: inherit;
     }
   }
 }
 
+/* WINDOWS */
 .bar {
-  all: unset;
-  /* {# replace_quoted(data.fonts.user) #} */
-  font-family: "NotoSansSerif";
-  font-size: 16px;
-  font-weight: bold;
-  background: red;
-  padding: 0 1.5em 0 1.5em;
 
-  .workspaces {
+  all: unset;
+  font-weight: bold;
+  padding: 0 1.5em 0 1.5em;
+  background: $bg;
+  color: $fg;
+
+  .widget-box {
     padding: 0.5rem;
+  }
+
+  .workspaces-widget {
+    .icon {
+      padding: 0;
+    }
 
     button.active {
-      color: green
+      .icon {
+        color: $aqua;
+      }
     }
   }
 
-  .power-button {
-    padding: 0.5rem;
+  .power-widget {
+    $fg: $red;
 
-    &:hover {
-      background: green;
+    .icon {
+      color: $fg;
+    }
+
+    widget {
+      border-radius: $br;
+
+      &:hover {
+        background: rgba($fg, 0.2);
+      }
     }
   }
 
-  .tray-widget button.active {
-    background: yellow;
-    color: black;
+  .battery-widget {
+    padding-right: 0.5rem;
+
+    &.full {
+      $fg: $green;
+
+      .icon {
+        color: $fg;
+      }
+    }
+
+    &.high {
+      $fg: $yellow;
+
+      .icon {
+        color: $fg;
+      }
+    }
+
+    &.half {
+      $fg: $orange;
+
+      .icon {
+        color: $fg;
+      }
+    }
+
+    &.low {
+      $fg: $light_red;
+
+      .icon {
+        color: $fg;
+      }
+    }
+
+    &.critical {
+      $fg: $red;
+
+      .icon {
+        color: $fg;
+      }
+    }
+  }
+
+  .tray-widget {
+    widget {
+      border-radius: $br;
+
+      &:hover {
+        background: rgba($fg, 0.2);
+      }
+
+    }
+
+    .active {
+      background: rgba($fg, 0.2);
+    }
   }
 }
 
