@@ -1,7 +1,6 @@
 vim.g.mapleader = " "
 vim.g.maplocalleader = "\\"
 vim.keymap.set("n", "<leader>pv", vim.cmd.Ex)
-vim.keymap.set("i", "jk", "<Esc>")
 
 -- Moves the lines
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
