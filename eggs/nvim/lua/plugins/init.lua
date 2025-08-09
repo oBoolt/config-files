@@ -49,5 +49,12 @@ return {
     {
         'tpope/vim-fugitive'
     },
+    {
+        'numToStr/Navigator.nvim',
+        lazy = false,
+        init = function()
+            require("Navigator").setup()
+        end,
+    },
 }
 
