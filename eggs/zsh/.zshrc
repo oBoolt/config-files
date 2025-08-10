@@ -38,18 +38,18 @@ setopt hist_find_no_dups
 source /usr/share/nvm/init-nvm.sh
 # Environment variables
 #[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-if [ -x $(which nvim) ]; then
+if [ -x "$(command -v nvim)" ]; then
     export EDITOR="$(which nvim)"
     export VISUAL="$(which nvim)"
 fi
 # Cargo env
-[ -x $(which cargo) ] && export PATH="$PATH:$HOME/.cargo/bin"
+[ -x "$(command -v cargo)" ] && export PATH="$PATH:$HOME/.cargo/bin"
 # Bat to man
-[ -x $(which bat) ] && export MANPAGER="sh -c 'sed -u -e \"s/\\x1B\[[0-9;]*m//g; s/.\\x08//g\" | bat -p -lman'"
+[ -x "$(command -v bat)" ] && export MANPAGER="sh -c 'sed -u -e \"s/\\x1B\[[0-9;]*m//g; s/.\\x08//g\" | bat -p -lman'"
 
 # Shell integrations
-[ -x $(which fzf) ] && eval "$(fzf --zsh)"
-[ -x $(which starship) ] && eval "$(starship init zsh)"
+[ -x "$(command -v fzf)" ] && eval "$(fzf --zsh)"
+[ -x "$(command -v starship)" ] && eval "$(starship init zsh)"
 # Android SDK
 # Set ANDROID_HOME 
 [ -d $ANDROID_HOME ] && PATH=$PATH:$ANDROID_HOME/tools:$ANDROID_HOME/tools/bin:$ANDROID_HOME/platform-tools:$ANDROID_HOME/cmdline-tools/latest/bin
@@ -59,7 +59,7 @@ fi
 [[ $(systemctl --user status ssh-agent.service >/dev/null) -eq 0 ]] && export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
 
 # eww
-[ -x $(which eww) ] && eval "$(eww shell-completions --shell zsh)"
+[ -x "$(command -v eww)" ] && eval "$(eww shell-completions --shell zsh)"
 
 # tmux
 if [ -x "$(command -v tmux)" ] && [ -n "${DISPLAY}" ] && [ -z "${TMUX}" ]; then
