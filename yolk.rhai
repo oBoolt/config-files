@@ -55,7 +55,7 @@ export let eggs = #{
     },
     tmux: #{
         targets: "~/.config/tmux",
-        main_file: ".tmux.conf",
+        main_file: "tmux.conf",
     },
     wofi: #{
         targets: "~/.config/wofi",
