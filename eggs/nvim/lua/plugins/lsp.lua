@@ -68,7 +68,7 @@ return {
 
         require('mason').setup({})
         require('mason-lspconfig').setup({
-            ensure_installed = { "rust_analyzer", "clangd", "biome", "emmet_language_server", "java_language_server", "cssls", "tombi" },
+            ensure_installed = { "rust_analyzer", "clangd", "biome", "emmet_language_server", "java_language_server", "cssls", "tombi", "docker_language_server" },
             handlers = {
                 function(server_name)
                     require('lspconfig')[server_name].setup({})
