@@ -2,7 +2,7 @@
 
 CACHE="${XDG_CACHE_HOME:-${HOME}/.cache}"
 EWW="eww --config $(eww get EWW_CONFIG_DIR)"
-WINDOWS=("tray")
+WINDOWS=("tray" "powermenu")
 
 toggle() {
     local LOCK_FILE="$CACHE/eww-$1.lock"
@@ -13,6 +13,9 @@ toggle() {
     else
         touch $LOCK_FILE
         $EWW close ${WINDOWS[*]}
+        for window in ${WINDOWS[@]}; do
+            $EWW update $window=false
+        done
         $EWW open $1
         $EWW update $1=true
     fi
