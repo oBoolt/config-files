@@ -4,6 +4,7 @@
 (defvar spacing 10)
 (defvar duration "350ms")
 (defvar tray false)
+(defvar powermenu false)
 (defvar showMusic false)
 (defvar revealAudio false)
 (defvar revealBattery false)
@@ -63,6 +64,19 @@
   (eventbox
     :onhoverlost "scripts/toggle.sh tray"
     (systray)))
+(defwindow powermenu
+  :monitor 0
+  :geometry (geometry
+              :width "50px"
+              :height "150px"
+              :anchor "top right"
+              :y "5px"
+              :x "0.9%")
+  :stacking "overlay"
+  :exclusive false
+  (eventbox
+    :onhoverlost "scripts/toggle.sh powermenu"
+    (powermenu)))
 (defwindow fullscreen
   :monitor 0
   :geometry (geometry
@@ -136,7 +150,7 @@
     :class "power-widget widget-box"
     :hexpand false
     (eventbox
-      :onclick "shutdown 0"
+      :onclick "scripts/toggle.sh powermenu"
       :cursor "pointer"
       (label
         :class "icon"
@@ -206,6 +220,33 @@
       (label
         :class "icon"
         :text "󰅀"))))
+
+(defwidget powermenu []
+  (box
+    :class "powermenu-widget widget-box"
+    :valign "fill"
+    :orientation "vertical"
+    (eventbox
+      :class "button suspend"
+      :onclick "systemctl suspend"
+      :cursor "pointer"
+      (label
+        :class "icon"
+        :text "󰏦"))
+    (eventbox
+      :class "button reboot"
+      :onclick "reboot"
+      :cursor "pointer"
+      (label
+        :class "icon"
+        :text "󰜉"))
+    (eventbox
+      :class "button shutdown"
+      :onclick "shutdown 0"
+      :cursor "pointer"
+      (label
+        :class "icon"
+        :text "󰐥"))))
 
 (defwidget left []
   (box

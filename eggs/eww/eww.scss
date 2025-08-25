@@ -179,3 +179,36 @@ button {
     padding-bottom: 0.25em;
   }
 }
+
+.powermenu {
+  background: transparent;
+
+  .powermenu-widget {
+    background: $bg;
+    border-radius: $br;
+    border: 1px solid $aqua;
+
+    .button {
+      &:hover {
+        background: rgba($fg, 0.2);
+      }
+    }
+
+    .suspend {
+      border-radius: $br $br 0 0;
+    }
+
+    .shutdown {
+      border-radius: 0 0 $br $br;
+      $fg: $red;
+
+      .icon {
+        color: $fg;
+      }
+
+      &:hover {
+        background: rgba($fg, 0.2);
+      }
+    }
+  }
+}
