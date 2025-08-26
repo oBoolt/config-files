@@ -41,11 +41,10 @@ source /usr/share/nvm/init-nvm.sh
 if [ -x "$(command -v nvim)" ]; then
     export EDITOR="$(which nvim)"
     export VISUAL="$(which nvim)"
+    export MANPAGER="$(which nvim) +Man!"
 fi
 # Cargo env
 [ -x "$(command -v cargo)" ] && export PATH="$PATH:$HOME/.cargo/bin"
-# Bat to man
-[ -x "$(command -v bat)" ] && export MANPAGER="sh -c 'sed -u -e \"s/\\x1B\[[0-9;]*m//g; s/.\\x08//g\" | bat -p -lman'"
 
 # Shell integrations
 [ -x "$(command -v fzf)" ] && eval "$(fzf --zsh)"
