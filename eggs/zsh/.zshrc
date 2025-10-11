@@ -13,7 +13,8 @@ source "${ZINIT_HOME}/zinit.zsh"
 [ -d $HOME/.local/bin ] && PATH=$PATH:$HOME/.local/bin
 
 # Keybinds
-#bindkey -v
+bindkey -v
+export KEYTIMEOUT=5
 
 # History
 HISTSIZE=5000
