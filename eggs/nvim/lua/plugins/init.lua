@@ -1,14 +1,5 @@
 return {
     { 
-        'numToStr/Comment.nvim',
-        opts = {
-            mappings = {
-                basic = true,
-                extra = true,
-            },
-        },
-    },
-    { 
         "ellisonleao/gruvbox.nvim",
         lazy = false,
         priority = 1000,
@@ -20,40 +11,6 @@ return {
             vim.cmd.colorscheme("gruvbox")
             vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
             vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
-        end,
-    },
-    { 
-        'mbbill/undotree',
-        init = function()
-            vim.keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle)
-        end,
-    },
-    {
-        'MeanderingProgrammer/render-markdown.nvim',
-        dependencies = { 'nvim-treesitter/nvim-treesitter', 'echasnovski/mini.nvim' }, -- if you use the mini.nvim suite
-        -- dependencies = { 'nvim-treesitter/nvim-treesitter', 'echasnovski/mini.icons' }, -- if you use standalone mini plugins
-        -- dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-tree/nvim-web-devicons' }, -- if you prefer nvim-web-devicons
-        ---@module 'render-markdown'
-        ---@type render.md.UserConfig
-        opts = {},
-    },
-    {
-        'elkowar/yuck.vim'
-    },
-    {
-        'rhaiscript/vim-rhai'
-    },
-    {
-        'gpanders/nvim-parinfer'
-    },
-    {
-        'tpope/vim-fugitive'
-    },
-    {
-        'numToStr/Navigator.nvim',
-        lazy = false,
-        init = function()
-            require("Navigator").setup()
         end,
     },
 }
