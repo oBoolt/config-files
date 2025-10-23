@@ -24,7 +24,6 @@ export let eggs = #{
     nvim: #{ 
         enabled: data.enabled.nvim,
         targets: "~/.config/nvim",
-        main_file: "lua/plugins/init.lua",
     },
     alacritty: #{ 
         enabled: data.enabled.alacritty,
