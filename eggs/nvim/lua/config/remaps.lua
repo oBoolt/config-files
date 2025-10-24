@@ -51,8 +51,15 @@ vim.api.nvim_create_autocmd("LspAttach", {
         opts.desc = "Show LSP type definitions"
         vim.keymap.set("n", "grd", function() vim.lsp.buf.definition() end, opts)
 
-        opts.desc = "Go to declaration"
-        vim.keymap.set("n", "grD", vim.lsp.buf.declaration(), opts) -- go to declaration
+        if client:supports_method('textDocument/declaration') then
+            opts.desc = "Go to declaration"
+            vim.keymap.set("n", "grD", function() vim.lsp.buf.declaration() end, opts)
+        end
+
+        if client:supports_method('textDocument/implementation') then
+            opts.desc = "Go to implementation"
+            vim.keymap.set("n", "gri", function() vim.lsp.buf.implementation() end, opts)
+        end
 
         opts.desc = "Show documentation under the cursor"
         vim.keymap.set("n", "K", function() vim.lsp.buf.hover() end, opts)
