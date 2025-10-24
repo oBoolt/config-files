@@ -26,8 +26,62 @@ vim.keymap.set("n", "Q", "<nop>")
 vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
 
 -- Move windows
-vim.keymap.set({'n', 't'}, '<C-h>', '<CMD>NavigatorLeft<CR>')
-vim.keymap.set({'n', 't'}, '<C-l>', '<CMD>NavigatorRight<CR>')
-vim.keymap.set({'n', 't'}, '<C-k>', '<CMD>NavigatorUp<CR>')
-vim.keymap.set({'n', 't'}, '<C-j>', '<CMD>NavigatorDown<CR>')
+vim.keymap.set({ 'n', 't' }, '<C-h>', '<CMD>NavigatorLeft<CR>')
+vim.keymap.set({ 'n', 't' }, '<C-l>', '<CMD>NavigatorRight<CR>')
+vim.keymap.set({ 'n', 't' }, '<C-k>', '<CMD>NavigatorUp<CR>')
+vim.keymap.set({ 'n', 't' }, '<C-j>', '<CMD>NavigatorDown<CR>')
 
+-- LSP
+vim.api.nvim_create_autocmd("LspAttach", {
+    desc = "LSP Remaps",
+    group = vim.api.nvim_create_augroup('my.lsp', {}),
+    callback = function(event)
+        local opts = { buffer = event.buf }
+        local client = assert(vim.lsp.get_client_by_id(event.data.client_id))
+
+        opts.desc = "Rename variable"
+        vim.keymap.set("n", "grn", function() vim.lsp.buf.rename() end, opts)
+
+        opts.desc = "Show code actions"
+        vim.keymap.set("n", "gra", function() vim.lsp.buf.code_action() end, opts)
+
+        opts.desc = "Show LSP references"
+        vim.keymap.set("n", "grr", function() vim.lsp.buf.references() end, opts)
+
+        opts.desc = "Show LSP type definitions"
+        vim.keymap.set("n", "grd", function() vim.lsp.buf.definition() end, opts)
+
+        opts.desc = "Go to declaration"
+        vim.keymap.set("n", "grD", vim.lsp.buf.declaration(), opts) -- go to declaration
+
+        opts.desc = "Show documentation under the cursor"
+        vim.keymap.set("n", "K", function() vim.lsp.buf.hover() end, opts)
+
+        opts.desc = "Show buffer diagnostics"
+        vim.keymap.set("n", "gd", function() vim.diagnostic.open_float() end, opts)
+
+        opts.desc = "Go to next diagnostic"
+        vim.keymap.set("n", "[d", function() vim.diagnostic.goto_next() end, opts)
+
+        opts.desc = "Go to previous diagnostic"
+        vim.keymap.set("n", "]d", function() vim.diagnostic.goto_prev() end, opts)
+
+        vim.keymap.set("n", "<leader>ws", function() vim.lsp.buf.workspace_symbol() end, opts)
+        vim.keymap.set("i", "<C-h>", function() vim.lsp.buf.signature_help() end, opts)
+
+        -- Auto-format ("lint") on save.
+        -- Usually not needed if server supports "textDocument/willSaveWaitUntil".
+        if not client:supports_method('textDocument/willSaveWaitUntil')
+            and client:supports_method('textDocument/formatting') then
+            vim.keymap.set("n", "grf",
+                function() vim.lsp.buf.format({ bufnr = event.buf, id = client.id, timeout_ms = 500 }) end, opts)
+            vim.api.nvim_create_autocmd('BufWritePre', {
+                group = vim.api.nvim_create_augroup('my.lsp', { clear = false }),
+                buffer = event.buf,
+                callback = function()
+                    vim.lsp.buf.format({ bufnr = event.buf, id = client.id, timeout_ms = 1000 })
+                end,
+            })
+        end
+    end,
+})
