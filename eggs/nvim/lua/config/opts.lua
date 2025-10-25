@@ -1,3 +1,6 @@
+-- Global variables
+vim.g.undodir = vim.fn.expand("~/.vim/undodir")
+
 -- theme & transparency
 vim.o.background = "dark"
 vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
@@ -44,15 +47,15 @@ vim.opt.lazyredraw = true     -- Don't redraw during macros
 vim.opt.synmaxcol = 500       -- Syntax highlighting limit
 
 -- File handling
-vim.opt.backup = false                            -- Don't create backup files
-vim.opt.writebackup = false                       -- Don't create backup before writing
-vim.opt.swapfile = false                          -- Don't create swap files
-vim.opt.undofile = true                           -- Persistent undo
-vim.opt.undodir = vim.fn.expand("~/.vim/undodir") -- Undo directory
-vim.opt.timeoutlen = 500                          -- Key timeout duration
-vim.opt.ttimeoutlen = 0                           -- Key code timeout
-vim.opt.autoread = true                           -- Auto reload files changed outside vim
-vim.opt.autowrite = false                         -- Don't auto save
+vim.opt.backup = false          -- Don't create backup files
+vim.opt.writebackup = false     -- Don't create backup before writing
+vim.opt.swapfile = false        -- Don't create swap files
+vim.opt.undofile = true         -- Persistent undo
+vim.opt.undodir = vim.g.undodir -- Undo directory
+vim.opt.timeoutlen = 500        -- Key timeout duration
+vim.opt.ttimeoutlen = 0         -- Key code timeout
+vim.opt.autoread = true         -- Auto reload files changed outside vim
+vim.opt.autowrite = false       -- Don't auto save
 
 -- Behavior settings
 vim.opt.hidden = true           -- Allow hidden buffers
@@ -64,9 +67,9 @@ vim.opt.selection = "exclusive" -- Selection behavior
 vim.opt.modifiable = true       -- Allow buffer modifications
 
 -- Folding settings
-vim.opt.foldmethod = "expr"                             -- Use expression for folding
+vim.opt.foldmethod = "expr"                          -- Use expression for folding
 vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()" -- Use treesitter for folding
-vim.opt.foldlevel = 99                                  -- Start with all folds open
+vim.opt.foldlevel = 99                               -- Start with all folds open
 
 -- Split behavior
 vim.opt.splitbelow = true -- Horizontal splits go below
