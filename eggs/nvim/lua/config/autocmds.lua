@@ -1,5 +1,10 @@
 local augroup = vim.api.nvim_create_augroup("my.cmds", {})
 
+-- Create undodir
+if vim.fn.isdirectory(vim.g.undodir) == 0 then
+    vim.fn.mkdir(vim.g.undodir, "p")
+end
+
 -- Set cursor to last line
 vim.api.nvim_create_autocmd("BufReadPost", {
     group = augroup,
@@ -12,7 +17,10 @@ vim.api.nvim_create_autocmd("BufReadPost", {
     end,
 })
 
--- Create undodir
-if vim.fn.isdirectory(vim.g.undodir) == 0 then
-    vim.fn.mkdir(vim.g.undodir, "p")
-end
+-- Highlight yanked text
+vim.api.nvim_create_autocmd("TextYankPost", {
+    group = augroup,
+    callback = function()
+        vim.hl.on_yank()
+    end
+})
