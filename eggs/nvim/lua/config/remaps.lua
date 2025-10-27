@@ -33,6 +33,15 @@ vim.keymap.set({ 'n', 't' }, '<C-l>', '<CMD>NavigatorRight<CR>')
 vim.keymap.set({ 'n', 't' }, '<C-k>', '<CMD>NavigatorUp<CR>')
 vim.keymap.set({ 'n', 't' }, '<C-j>', '<CMD>NavigatorDown<CR>')
 
+-- Splitting and Resize
+vim.keymap.set("n", "<leader>v", ":vsplit<CR>")
+vim.keymap.set("n", "<leader>h", ":split<CR>")
+vim.keymap.set("n", "<C-Up>", ":resize +2<CR>")
+vim.keymap.set("n", "<C-Down>", ":resize -2<CR>")
+vim.keymap.set("n", "<C-Left>", ":vertical resize -2<CR>")
+vim.keymap.set("n", "<C-Right>", ":vertical resize +2<CR>")
+
+
 -- LSP
 vim.api.nvim_create_autocmd("LspAttach", {
     desc = "LSP Remaps",
