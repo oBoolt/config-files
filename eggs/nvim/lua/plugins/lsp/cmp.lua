@@ -6,6 +6,7 @@ return {
             "hrsh7th/cmp-path",
             "hrsh7th/cmp-nvim-lsp",
             "saadparwaiz1/cmp_luasnip",
+            "hrsh7th/cmp-calc",
             {
                 "L3MON4D3/LuaSnip",
                 version = "v2.*",
@@ -27,6 +28,7 @@ return {
                     { name = "nvim_lsp" },
                     { name = "buffer" },
                     { name = "path" },
+                    { name = "calc" },
                 }),
                 mapping = cmp.mapping.preset.insert({
                     ['<Tab>'] = cmp.mapping.confirm({ select = true }),
@@ -44,7 +46,7 @@ return {
         event = { "BufReadPre", "BufNewFile" },
         dependencies = {
             { "antosha417/nvim-lsp-file-operations", config = true },
-            { "folke/lazydev.nvim", opts = {} },
+            { "folke/lazydev.nvim",                  opts = {} },
         },
         config = function()
             local cmp_lsp = require("cmp_nvim_lsp")
