@@ -5,13 +5,16 @@
 (defvar duration "350ms")
 (defvar tray false)
 (defvar powermenu false)
+(defvar brightnessDevice "intel_backlight")
 (defvar showMusic false)
 (defvar revealAudio false)
 (defvar revealBattery false)
+(defvar revealBrightness false)
 (defpoll date
   :interval "10s"
   :initial "00:00"
   "date +%H:%M")
+(defpoll brightnessValue :interval "5s" "brightnessctl -m -d intel_backlight | awk -F, '{print substr($4, 0, length($4)-1)}' | tr -d '%'")
 (deflisten activeWorkspace
   :initial "1"
   "scripts/execs/hyprland --active")
@@ -248,6 +251,30 @@
         :class "icon"
         :text "󰐥"))))
 
+(defwidget brightness [value device]
+                       
+  (eventbox
+    :onhover "${EWW_CMD} update revealBrightness=true"
+    :onhoverlost "${EWW_CMD} update revealBrightness=false"
+    (box
+      :class "brightness-widget"
+      :space-evenly false
+      :tooltip device
+      (label
+        :class "icon"
+        :text {value < 16 ? "󰃚" :
+               value < 32 ? "󰃛" :
+               value < 48 ? "󰃜" :
+               value < 64 ? "󰃝" :
+               value < 75 ? "󰃞" :
+               value < 90 ? "󰃟" : "󰃠"})
+      (revealer
+        :reveal revealBrightness
+        :transition "slideleft"
+        :duration duration
+        (label
+          :text "${value}%")))))
+
 (defwidget left []
   (box
     :halign "start"
@@ -272,6 +299,9 @@
     (audio
       :volume volume
       :muted muted)
+    (brightness
+      :value brightnessValue
+      :device brightnessDevice)
     (battery
       :capacity {EWW_BATTERY.BAT0.capacity}
       :status {EWW_BATTERY.BAT0.status})
